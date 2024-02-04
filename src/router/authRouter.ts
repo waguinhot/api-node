@@ -7,7 +7,32 @@ const authRepo = new authRepository();
 
 const loginAuth = new authLogin(authRepo);
 
-authRouter.post('/login', async (req: Request, res: Response) => {
+
+/**
+ * @swagger
+ * /api/login:
+ *   post:
+ *     summary: Faz o login da autenticação
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Mensagem de sucesso
+ *         content:
+ *           application/json:
+ *             example:
+ *               data: "STRING - TOKEN JWT"
+ */
+authRouter.post('/api/login', async (req: Request, res: Response) => {
 
     const input = req.body; 
     try {

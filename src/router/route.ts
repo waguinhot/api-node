@@ -25,7 +25,21 @@ router.get('/', function (req: Request, res: Response) {
     res.status(200).send('API em execução!');
 });
 
-router.get('/users', authMiddleware , async function (req: Request, res: Response) {
+
+/**
+ * @swagger
+ * /:
+ *   get:
+ *     summary: Endpoint utilizado para validar conexão
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Mensagem de sucesso
+ *         content:
+ *           application/json:
+ */
+router.get('/api/users', authMiddleware , async function (req: Request, res: Response) {
 
     try {
         const output = await userGet.execute()
@@ -35,6 +49,33 @@ router.get('/users', authMiddleware , async function (req: Request, res: Respons
     }
 })
 
+
+
+/**
+ * @swagger
+ * /api/user/{id}:
+ *   get:
+ *     summary: Obtém informações de um usuário por ID
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: ID do usuário
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       200:
+ *         description: Mensagem de sucesso
+ *         content:
+ *           application/json:
+ *             example:
+ *               data:
+ *                 id: 1
+ *                 name: John Doe
+ *                 email: john@example.com
+ */
 router.get('/user/:id', authMiddleware ,  async function (req: Request, res: Response) {
 
     const id = parseInt(req.params.id as string);
@@ -47,13 +88,33 @@ router.get('/user/:id', authMiddleware ,  async function (req: Request, res: Res
     }
 })
 
-router.post('/user/create', authMiddleware , async function (req: Request, res: Response) {
+
+
+/**
+ * @swagger
+ * /api/user/create:
+ *   post:
+ *     summary: Cadastra o usuario e retorna ele na req
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Mensagem de sucesso
+ *         content:
+ *           application/json:
+ *             example:
+ *               data:
+ *                 - id: 1
+ *                   name: John Doe
+ *                   email: john@example.com
+ */
+router.post('/api/user/create', authMiddleware , async function (req: Request, res: Response) {
 
     const input = req.body;
 
     try {
         const output = await userCreate.execute(input)
-        res.status(200).json({ message: 'USUARIO CRIADO COM SUCESSO!', data: output });
+        res.status(201).json({ message: 'USUARIO CRIADO COM SUCESSO!', data: output });
     } catch (error: any) {
         res.status(422).json({ error: error.message })
     }
@@ -61,7 +122,25 @@ router.post('/user/create', authMiddleware , async function (req: Request, res: 
 });
 
 
-router.put('/user/update/:id', authMiddleware ,  async function (req: Request, res: Response) {
+/**
+ * @swagger
+ * /api/user/update/{id}:
+ *   put:
+ *     summary: Atualiza o usuario e retorna ele na req
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Mensagem de sucesso
+ *         content:
+ *           application/json:
+ *             example:
+ *               data:
+ *                 - id: 1
+ *                   name: John Doe
+ *                   email: john@example.com
+ */
+router.put('/api/user/update/:id', authMiddleware ,  async function (req: Request, res: Response) {
     const input = req.body;
     const id = parseInt(req.params.id as string);
 
@@ -76,7 +155,21 @@ router.put('/user/update/:id', authMiddleware ,  async function (req: Request, r
 
 });
 
-router.delete('/user/delete/:id', authMiddleware ,  async function (req: Request, res: Response) {
+
+/**
+ * @swagger
+ * /api/user/delete/{id}:
+ *   delete:
+ *     summary: deleta o usuario informado
+ *     security:
+ *       - BearerAuth: []
+ *     responses:
+ *       201:
+ *         description: Mensagem de sucesso
+ *         content:
+ *           application/json:
+ */
+router.delete('/api/user/delete/:id', authMiddleware ,  async function (req: Request, res: Response) {
     const id = parseInt(req.params.id as string);
 
     try {

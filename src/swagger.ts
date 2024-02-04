@@ -7,14 +7,14 @@ const swaggerDefinition = {
     },
     servers: [
       {
-        url: 'http://localhost:3000', // Altere conforme necessário
+        url: 'http://localhost:3000',
       },
     ],
   };
   
   const options = {
     swaggerDefinition,
-    apis: ['./src/router/*.ts'], // Caminho para seus arquivos de rotas
+    apis: ['./src/router/*.ts'], 
   };
 export default options;
   

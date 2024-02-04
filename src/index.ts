@@ -16,10 +16,7 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 
 
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
-
-
-app.use(cors()); // Habilita o CORS
+app.use(cors()); 
 app.use(express.json());
 
 app.use(authRouter);

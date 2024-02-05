@@ -76,7 +76,7 @@ router.get('/api/users', authMiddleware , async function (req: Request, res: Res
  *                 name: John Doe
  *                 email: john@example.com
  */
-router.get('/user/:id', authMiddleware ,  async function (req: Request, res: Response) {
+router.get('/api/user/:id', authMiddleware ,  async function (req: Request, res: Response) {
 
     const id = parseInt(req.params.id as string);
 

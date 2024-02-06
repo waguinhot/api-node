@@ -4,6 +4,11 @@
 
 Bem-vindo à documentação da API do projeto XYZ. Esta API é desenvolvida em Node.js com TypeScript, usando Prisma para acesso ao banco de dados, Jest para testes e autenticação JWT.
 
+
+## DOC SWAGGER
+/api-docs
+
+
 ## Autenticação
 
 A API utiliza autenticação JWT. Para acessar as rotas protegidas, você deve incluir um token JWT válido no cabeçalho da solicitação.

@@ -6,8 +6,8 @@ export class updateUser {
 
     async execute(id:number , data: IUser){
        try {
-        data.password =  await bcrypt.hash(data.password, 10);
-        const user = await this.userRepository.update(id, data);
+        if(data.password == "") throw new Error("Necessario informar uma senha valida");
+         const user = await this.userRepository.update(id, data);
         return user;
        } catch (error: any) {
             throw new Error("ERRO AO ATUALIZAR USUARIO " + error.message.toString());

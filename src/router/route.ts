@@ -147,9 +147,9 @@ router.put('/api/user/update/:id', authMiddleware ,  async function (req: Reques
     try {
 
         const output = await userUpdate.execute(id, input)
-        res.status(200).json({ message: 'USUARIO ATUALIZADO COM SUCESSO!', data: output });
+        res.status(201).json({ message: 'USUARIO ATUALIZADO COM SUCESSO!', data: output });
     } catch (error: any) {
-        res.status(422).json({ error: error })
+        res.status(422).json({ error: error.message })
     }
 
 

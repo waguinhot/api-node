@@ -2,7 +2,7 @@
 
 ## Introdução
 
-Bem-vindo à documentação da API do projeto XYZ. Esta API é desenvolvida em Node.js com TypeScript, usando Prisma para acesso ao banco de dados, Jest para testes e autenticação JWT.
+Bem-vindo à documentação da API do projeto userZ (dar nomes as variaveis me esgotou, nao sobrou criatividade pro projeto). Esta API é desenvolvida em Node.js com TypeScript, usando Prisma para acesso ao banco de dados, Jest para testes e autenticação JWT.
 
 
 ## DOC SWAGGER

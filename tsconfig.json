@@ -19,6 +19,6 @@
   }, 
   "include": [
     "src/**/*.ts",
-    "typings.d.ts" // Inclua aqui o seu arquivo de definição de tipos
+    "typings.d.ts" 
   ]
 }

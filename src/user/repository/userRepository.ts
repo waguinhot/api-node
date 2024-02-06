@@ -48,17 +48,17 @@ export class userRepository implements IUserRepository {
             throw new Error("ERRO: "+error?.message?.toString());
         }
     }
-    async update(id: number, user: IUser): Promise<void> {
+    async update(id: number, user: IUser): Promise<IUser> {
         const updateUser = await this.prisma.user.update({
             where: {
                 id: id,
             },
             data: {
-                name: user.name,
-                email: user.email,
-                password: user.password
+               ...user
             },
         })
+
+        return updateUser;
     }
     async delete(id: number): Promise<void> {
         try{

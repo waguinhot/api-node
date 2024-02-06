@@ -35,7 +35,7 @@ test('deve criar o usuario corretamente' , async () =>{
 
 
 
-test('deve deletear o usuario corretamente e nao retornar' , async () =>{
+test('deve deletar o usuario corretamente e nao retornar' , async () =>{
 
     let user = {
         name: 'example name',
@@ -95,6 +95,53 @@ test('nao deve achar o usuario pelo id por nao existir' , async () =>{
     
     })
 
+
+    test('deve atualizar o usuario corretamente' , async () =>{
+        const jwt = await pegarJWT();
+
+        let user = {
+            name: 'example name',
+            email: 'teste@email.com',
+            password: 'secret123'
+        }
+
+        const resCreate = await fetch('http://localhost:4500/api/user/create' , {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + jwt
+            },
+            body: JSON.stringify(user)
+        })
+
+        const outputResCreate = await resCreate.json();
+        const userCreated =  outputResCreate.data;
+
+        const response = await fetch('http://localhost:4500/api/user/update/' + userCreated.id , {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + jwt
+            },
+            body: JSON.stringify({
+                name: 'example',
+            })
+        });
+
+        const output = await response.json();
+
+        expect(output.data.name).toEqual('example');
+
+        expect(response.status).toEqual(201);
+
+        await fetch('http://localhost:4500/api/user/delete/' + outputResCreate.data.id , {
+        method: 'DELETE',
+        headers: {
+                    Authorization: 'Bearer ' + jwt
+                }
+            })
+
+    })
     async function pegarJWT(){
         const response = await fetch('http://localhost:4500/api/login' , {
             method: 'POST',
@@ -111,3 +158,4 @@ test('nao deve achar o usuario pelo id por nao existir' , async () =>{
         const jwt = await output.data.token;
         return jwt;
     }
+
